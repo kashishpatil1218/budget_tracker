@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -57,6 +57,22 @@ async {
   String query= '''DELETE FROM $_tableName WHERE id = ?''';
   List args = [id];
   await db!.rawDelete(query,args);
+}
+// TODO : foe upadte the data
+Future<void> updateRecord(int id,isIncome, double amount,String date,category)
+async {
+    Database? db = await database;
+    String query = '''UPDATE $_tableName SET amount = ?,category = ?, IsIncome = ?, date = ? WHERE id = ?''';
+    List args = [amount,category,isIncome,date,id];
+    await db!.rawUpdate(query,args);
+}
+
+Future<List<Map<String, Object?>>> filterCategory(int isIncome)
+async {
+    Database? db = await  database;
+    String query = "SELECT * FROM $_tableName WHERE isIncome=?";
+    List args = [isIncome];
+   return await  db!.rawQuery(query,args);
 }
 
 }
