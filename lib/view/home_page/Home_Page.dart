@@ -14,10 +14,30 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
-        title: Text(
-          'Hi,Kashish Patil...',
-          style: TextStyle(color: Colors.white),
-        ),
+        title:
+            Text('Hi,Kashish Patil...', style: TextStyle(color: Colors.white)),
+        bottom: PreferredSize(
+            preferredSize: const Size(double.infinity, 30),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                onChanged:(value){
+                  controller.filterBySearch(value);
+                },
+                controller: controller.txtSearch,
+                decoration: InputDecoration(
+                    hintText: 'Search',
+                    suffixIcon: IconButton(
+                        onPressed: () {
+                          controller.filterBySearch(controller.txtSearch.text);
+                        },
+                        icon: const Icon(
+                          Icons.search,
+                          color: Colors.black,
+                        )),
+                    hintStyle: const TextStyle(color: Colors.black)),
+              ),
+            )),
       ),
       body: Column(
         mainAxisSize: MainAxisSize.min,

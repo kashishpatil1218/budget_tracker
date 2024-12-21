@@ -75,4 +75,13 @@ async {
    return await  db!.rawQuery(query,args);
 }
 
+//TODO for search category-------------------------------------------------------------
+Future<List<Map<String, Object?>>> filterBySearch(String search)
+async {
+      Database? db = await database;
+      String query = "SELECT * FROM $_tableName WHERE category LIKE '$search%'";
+      //List args = [search];
+     return await db!.rawQuery(query);
+}
+
 }

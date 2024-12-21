@@ -2,13 +2,14 @@ import 'package:budget_tracker_app/Helper/db_helper.dart';
 import 'package:budget_tracker_app/modal/budget_modal.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/get_state_manager.dart';
+// import 'package:get/get_state_manager/get_state_manager.dart';
 
 import '../view/home_page/Home_Page.dart';
 
 class HomeController extends GetxController {
   TextEditingController txtAmount = TextEditingController();
   TextEditingController txtCategory = TextEditingController();
+  TextEditingController txtSearch = TextEditingController();
 
   RxList<Budget> budgetList = <Budget>[].obs;
   RxBool isIncome = false.obs; // todo: for dialogue box switch
@@ -61,6 +62,14 @@ class HomeController extends GetxController {
   async {
     List records = await DbHelper.dbHelper.filterCategory(isIncome);
     budgetList.value = records.map((e) => Budget.fromMap(e)).toList();
+  }
+
+  // TODO filter by search------------------------------------------------------------------
+
+  Future<void> filterBySearch(String search)
+  async {
+    List data = await DbHelper.dbHelper.filterBySearch(search);
+    budgetList.value = data.map((e)=> Budget.fromMap(e)).toList();
   }
 
   Future<void>  calculateBalance()
