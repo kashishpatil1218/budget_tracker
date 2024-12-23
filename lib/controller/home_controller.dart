@@ -1,3 +1,5 @@
+import 'dart:nativewrappers/_internal/vm/lib/typed_data_patch.dart';
+
 import 'package:budget_tracker_app/Helper/db_helper.dart';
 import 'package:budget_tracker_app/modal/budget_modal.dart';
 import 'package:flutter/material.dart';
@@ -16,13 +18,26 @@ class HomeController extends GetxController {
   RxDouble income = 0.0.obs;
   RxDouble expance = 0.0.obs;
   RxDouble balance = 0.0.obs;
+  RxList user = [].obs;
   @override
   void onInit() {
     /// todo: implement onInit----------------------------------------------
     DbHelper.dbHelper.database;
     fetchData();
-
+    getUser();
     super.onInit();
+  }
+
+  //TODO: for user-------------------------------------------
+
+  Future<void> getUser()
+  async {
+     user.value = await DbProfileHelp.dbProfileHelp.fetchData();
+  }
+  Future<void>  setUser(String name,phone,email,Uint8List img)
+  async {
+await DbProfileHelp.dbProfileHelp.insertData(name, phone, email, img);
+await getUser();
   }
 
   /// todo: for dialogue box switch----------------------------------------------
@@ -93,4 +108,18 @@ class HomeController extends GetxController {
       }
     balance.value = income.value - expance.value;
   }
+
+
 }
+
+
+class BottomNavController extends GetxController {
+  // Observing the selected index
+  var selectedIndex = 0.obs;
+
+  // Method to change the selected index
+  void changeTab(int index) {
+    selectedIndex.value = index;
+  }
+}
+
