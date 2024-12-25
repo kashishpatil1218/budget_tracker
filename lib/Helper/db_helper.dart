@@ -1,5 +1,5 @@
 
-import 'dart:nativewrappers/_internal/vm/lib/typed_data_patch.dart';
+
 
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
@@ -21,15 +21,24 @@ class DbHelper
 
     _database = await openDatabase(path,version: 1,onCreate: (db, version) async{
 
-      String query = ''' CREATE TABLE budget(
+      String query = ''' CREATE TABLE $_tableName(
       id iNTEGER PRIMARY KEY AUTOINCREMENT,
       amount REAL,
       isIncome INTEGER,
       date TEXT,
       category TEXT
       )''';
+// TODO second table---------------------------------------
+      String userQuery = '''CREATE TABLE user(
+      id iNTEGER PRIMARY KEY AUTOINCREMENT,
+      name TEXT,
+      email TEXT,
+      phone TEXT,
+      img BLOB
+      )''';
 
       await db.execute(query);
+      await db.execute(userQuery);
     });
     return _database;
   }
@@ -87,46 +96,4 @@ async {
 }
 
 
-}
-
-
-class DbProfileHelp{
-  DbProfileHelp._();
-  static DbProfileHelp dbProfileHelp =DbProfileHelp._();
-  Database? _database;
-  Future<Database?> get database async => _database ?? await createDbProfile();
-
-
-  Future<Database?> createDbProfile()
-  async {
-    final  path =await  getDatabasesPath();
-    final dbPath =  join(path,'profile.db');
-
-    _database = await openDatabase(dbPath,version: 2,onCreate: (db,version) async {
-      String sql = '''CREATE TABLE profile(
-      id INTEGER PRIMARY KEY AUTOINCREMENT,
-      name TEXT,
-      email TEXT,
-      phone TEXT,
-      img BLOB
-      )''';
-     await  db.execute(sql);
-    });
-    return _database;
-
-  }
-
-  Future<void> insertData(String name,phone,email,Uint8List img)
-  async {
-      Database? db = await _database;
-      String sql = "INSERT INTO profile(name,phone,email,img) VALUES(?,?,?,?)";
-      List args = [name,phone,email,img];
-      await db!.rawInsert(sql,args);
-  }
-
-  Future<List<Map<String, Object?>>> fetchData() async {
-    Database? db = await _database;
-    String sql = "SELECT * FROM profile";
-    return await db!.rawQuery(sql);
-  }
 }

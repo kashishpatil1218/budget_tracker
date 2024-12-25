@@ -1,10 +1,10 @@
-import 'dart:nativewrappers/_internal/vm/lib/typed_data_patch.dart';
+
 
 import 'package:budget_tracker_app/Helper/db_helper.dart';
 import 'package:budget_tracker_app/modal/budget_modal.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-// import 'package:get/get_state_manager/get_state_manager.dart';
+
 
 import '../view/home_page/Home_Page.dart';
 
@@ -24,21 +24,11 @@ class HomeController extends GetxController {
     /// todo: implement onInit----------------------------------------------
     DbHelper.dbHelper.database;
     fetchData();
-    getUser();
+
     super.onInit();
   }
 
-  //TODO: for user-------------------------------------------
 
-  Future<void> getUser()
-  async {
-     user.value = await DbProfileHelp.dbProfileHelp.fetchData();
-  }
-  Future<void>  setUser(String name,phone,email,Uint8List img)
-  async {
-await DbProfileHelp.dbProfileHelp.insertData(name, phone, email, img);
-await getUser();
-  }
 
   /// todo: for dialogue box switch----------------------------------------------
   void switchOfIsIncome(bool value) {
@@ -110,16 +100,31 @@ await getUser();
   }
 
 
+
+
+
+
+
 }
 
 
 class BottomNavController extends GetxController {
-  // Observing the selected index
+
   var selectedIndex = 0.obs;
 
-  // Method to change the selected index
   void changeTab(int index) {
     selectedIndex.value = index;
+  }
+}
+
+// TODO radio----------------
+class GenderController extends GetxController {
+
+  var selectedGender = ''.obs;
+
+
+  void setGender(String gender) {
+    selectedGender.value = gender;
   }
 }
 

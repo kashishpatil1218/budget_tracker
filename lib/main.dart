@@ -1,4 +1,8 @@
-import 'package:budget_tracker_app/view/home_page/Home_Page.dart';
+import 'package:budget_tracker_app/view/Profile/edite_profile.dart';
+
+import 'package:budget_tracker_app/view/bottom_navigation/bottom_navigation_bar.dart';
+
+import 'package:budget_tracker_app/view/home_page/search_page.dart';
 import 'package:budget_tracker_app/view/splash_screen/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,8 +19,22 @@ class BudgetTracker extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       getPages: [
-        GetPage(name: '/', page: () => const SplashScreen()),
-        GetPage(name: '/home', page: () => const HomePage()),
+        GetPage(
+          name: '/',
+          page: () => const SplashScreen(),
+        ),
+        GetPage(
+          name: '/bottom',
+          page: () => BottomNavigation(),
+        ),
+        GetPage(
+          name: '/editPro',
+          page: () => const EditProfile(),
+        ),
+        GetPage(
+          name: '/search',
+          page: () => const SearchPage(),
+        ),
       ],
     );
   }
