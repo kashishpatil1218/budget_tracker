@@ -22,7 +22,7 @@ class DbHelper
     _database = await openDatabase(path,version: 1,onCreate: (db, version) async{
 
       String query = ''' CREATE TABLE $_tableName(
-      id iNTEGER PRIMARY KEY AUTOINCREMENT,
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
       amount REAL,
       isIncome INTEGER,
       date TEXT,
@@ -30,10 +30,11 @@ class DbHelper
       )''';
 // TODO second table---------------------------------------
       String userQuery = '''CREATE TABLE user(
-      id iNTEGER PRIMARY KEY AUTOINCREMENT,
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
       name TEXT,
       email TEXT,
       phone TEXT,
+      age TEXT,
       img BLOB
       )''';
 

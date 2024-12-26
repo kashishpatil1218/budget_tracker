@@ -1,19 +1,20 @@
+import 'package:budget_tracker_app/view/home_page/Home_Page.dart';
+import 'package:budget_tracker_app/view/home_page/component/insert_dialogueBox.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
-
 import '../../controller/bottom_navigation_controller.dart';
+import '../../controller/user_controller.dart';
 
 class BottomNavigation extends StatelessWidget {
   BottomNavigation({super.key});
 
-  var bottomNavigationController = Get.put(BottomNavigationController());
+  final bottomNavigationController = Get.put(BottomNavigationController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Obx(
-        () => bottomNavigationController
+            () => bottomNavigationController
             .screenList[bottomNavigationController.screenIndex.value],
       ),
       bottomNavigationBar: BottomAppBar(
@@ -21,40 +22,49 @@ class BottomNavigation extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            IconButton(
+            Obx(() => IconButton(
               onPressed: () {
                 bottomNavigationController.indexChange(index: 0);
               },
               icon: Icon(
                 Icons.home,
-                color: Colors.blue,
+                color: bottomNavigationController.screenIndex.value == 0
+                    ? Colors.blue
+                    : Colors.grey,
                 size: 40,
               ),
-            ),
+            )),
             const SizedBox(
               width: 10,
             ),
-            IconButton(
+            Obx(() => IconButton(
               onPressed: () {
                 bottomNavigationController.indexChange(index: 1);
+
               },
               icon: Icon(
                 Icons.person,
-                color: Colors.blue,
+                color: bottomNavigationController.screenIndex.value == 1
+                    ? Colors.blue
+                    : Colors.grey,
                 size: 40,
               ),
-            ),
+            )),
           ],
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: GestureDetector(
-        onTap: () {},
+        onTap: () {
+          insertBox(context);
+          controller.txtCategory.clear();
+          controller.txtAmount.clear();
+        },
         child: Container(
           height: 70,
           width: 70,
           decoration: BoxDecoration(color: Colors.blue, shape: BoxShape.circle),
-          child: Icon(
+          child: const Icon(
             Icons.add,
             size: 28,
             color: Colors.white,

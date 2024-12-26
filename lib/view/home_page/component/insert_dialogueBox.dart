@@ -19,12 +19,14 @@ Future<void> insertBox(BuildContext context) async {
         mainAxisSize: MainAxisSize.min,
         children: [
           TextField(
+            style: TextStyle(color: Colors.white),
             controller: controller.txtAmount,
             decoration: InputDecoration(
                 hintText: 'Amount',
                 hintStyle: TextStyle(color: Colors.grey.shade400)),
           ),
           TextField(
+            style: TextStyle(color: Colors.white),
             controller: controller.txtCategory,
             decoration: InputDecoration(
                 hintText: 'category',
@@ -71,7 +73,8 @@ Future<void> editBox(BuildContext context, Budget currentRecord) async {
   await showDialog(
     context: context,
     builder: (context) => AlertDialog(
-      title:  Text('Add Record'),
+      backgroundColor: Colors.black,
+      title:  Text('Update',style: TextStyle(color: Colors.white),),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
@@ -91,7 +94,7 @@ Future<void> editBox(BuildContext context, Budget currentRecord) async {
           ),
           Obx(
             () => SwitchListTile(
-              title: Text('Income'),
+              title: Text('Income',style: TextStyle(color: Colors.deepPurple),),
               value: controller.isIncome.value,
               onChanged: (value) {
                 controller.switchOfIsIncome(value);

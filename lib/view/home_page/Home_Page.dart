@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 Navigator.of(context).pushNamed('/search');
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.search,
                 color: Colors.white,
               ))
@@ -45,14 +45,14 @@ class HomePage extends StatelessWidget {
                   itemCount: controller.budgetList.length,
                   itemBuilder: (context, index) => Card(
                         color: controller.budgetList[index].isIncome == 1
-                            ? Colors.green.shade100
-                            : Colors.red.shade100,
+                            ? Colors.cyan.shade100
+                            : Color(0xFFB3C8CF),
                         child: ListTile(
                           leading: Text(
-                            controller.budgetList[index].id.toString(),
+                            controller.budgetList[index].id.toString(),style: TextStyle(fontSize: 19),
                           ),
                           title: Text(
-                            controller.budgetList[index].amount.toString(),
+                            controller.budgetList[index].amount.toString(),style: TextStyle(fontWeight: FontWeight.bold),
                           ),
                           subtitle: Text(
                               controller.budgetList[index].category! +

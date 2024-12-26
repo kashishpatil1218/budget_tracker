@@ -1,8 +1,8 @@
 import 'dart:ui';
-
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../../controller/user_controller.dart';
 import '../Home_Page.dart';
 
 Widget smartCard() {
@@ -44,14 +44,16 @@ Widget smartCard() {
                 const SizedBox(
                   width: 20,
                 ),
-                const Text(
-                  'kashish patil',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                )
+                 Obx(
+                   () =>  Text(
+                    (usercontroller.userList[0].name!),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                                   ),
+                 )
               ],
             ),
             Row(
@@ -93,7 +95,7 @@ Widget smartCard() {
                           sections: [
                             PieChartSectionData(
                               value: income.value,
-                              color: Colors.green.shade300,
+                              color: Colors.green,
                               title: 'Income\n${controller.income.value}/-',
                               titleStyle: const TextStyle(
                                 color: Colors.white,
@@ -104,7 +106,7 @@ Widget smartCard() {
                             ),
                             PieChartSectionData(
                               value: expense.value,
-                              color: Colors.red.shade300,
+                              color: Colors.red,
                               title: 'Expense\n${controller.expance.value}/-',
                               titleStyle: const TextStyle(
                                 color: Colors.white,
@@ -115,7 +117,7 @@ Widget smartCard() {
                             ),
                             PieChartSectionData(
                               value: balance.value,
-                              color: Colors.grey.shade400,
+                              color: Colors.grey,
                               title: 'Balance\n${controller.balance.value}/-',
                               titleStyle: const TextStyle(
                                 color: Colors.white,
@@ -139,9 +141,9 @@ Widget smartCard() {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                buildLegend('Income', Colors.green.shade300),
-                buildLegend('Expense', Colors.red.shade300),
-                buildLegend('Balance', Colors.grey.shade400),
+                buildLegend('Income', Colors.green),
+                buildLegend('Expense', Colors.red),
+                buildLegend('Balance', Colors.grey),
               ],
             ),
           ],
@@ -151,7 +153,7 @@ Widget smartCard() {
   );
 }
 
-// Helper widget for the legend
+
 Widget buildLegend(String label, Color color) {
   return Row(
     children: [

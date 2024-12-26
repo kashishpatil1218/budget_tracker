@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../controller/user_controller.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -6,12 +9,12 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.white,
         title: Text(
           'Profile',
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
         ),
       ),
       body: Column(
@@ -20,14 +23,20 @@ class ProfilePage extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 20, top: 10),
-                child: CircleAvatar(
-                  radius: 45,
+                child: Obx(
+                  () =>  CircleAvatar(
+                    backgroundImage: (usercontroller.isImage.value)
+                        ? NetworkImage(
+                        'https://s3.amazonaws.com/37assets/svn/765-default-avatar.png')
+                        : MemoryImage(usercontroller.image!),
+                    radius: 45,
+                  ),
                 ),
               ),
 
           Padding(
             padding: const EdgeInsets.only(left: 10,top: 5),
-            child: Text('Kashish patil',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),),
+            child: Obx(() =>Text(usercontroller.userList[0].name!,style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 20),)),
           ),
           SizedBox(width: 60,),
           Padding(
@@ -40,13 +49,13 @@ class ProfilePage extends StatelessWidget {
           ),
           SizedBox(height: 30,),
           Icons_name(icon: Icons.email,name:'Email'),
-          deatil(detail: 'kahsi573@gmail.com'),
+          Obx(() =>  deatil(detail:usercontroller.userList[0].email!)),
           SizedBox(height: 30,),
           Icons_name(icon: Icons.phone,name:'Mobile Number'),
-          deatil(detail: '745896512'),
+          Obx(() =>  deatil(detail:usercontroller.userList[0].phone!)),
           SizedBox(height: 30,),
           Icons_name(icon: Icons.person,name:'Age'),
-          deatil(detail: '19'),
+          Obx(() =>  deatil(detail:usercontroller.userList[0].age!)),
           SizedBox(height: 30,),
           Icons_name(icon: Icons.generating_tokens_outlined,name:'Gender'),
           deatil(detail: 'Female'),
@@ -60,7 +69,7 @@ class ProfilePage extends StatelessWidget {
           alignment: Alignment.topLeft,
             child: Padding(
                padding: EdgeInsets.only(left: 15,top: 10),
-              child: Text(detail,style: TextStyle(color: Colors.white),),
+              child: Text(detail,style: TextStyle(color: Colors.black),),
             ));
   }
 

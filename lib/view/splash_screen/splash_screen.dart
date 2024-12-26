@@ -2,15 +2,19 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 
+import '../../controller/user_controller.dart';
+
 class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     Timer.periodic(
-      const Duration(seconds: 5),
-          (timer) {
-        Navigator.of(context).pushReplacementNamed("/home");
+      const Duration(seconds: 2),
+      (timer) {
+        usercontroller.registerUser(
+            'deep patel', 'pateldeep123@gmail.com', '123654789', '20');
+        Navigator.of(context).pushReplacementNamed('/bottom');
       },
     );
     return Scaffold(
