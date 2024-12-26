@@ -44,16 +44,14 @@ Widget smartCard() {
                 const SizedBox(
                   width: 20,
                 ),
-                 Obx(
-                   () =>  Text(
-                    (usercontroller.userList[0].name!),
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                                   ),
-                 )
+                Text(
+                  ('Kashish patil'),
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ],
             ),
             Row(
@@ -67,16 +65,16 @@ Widget smartCard() {
                     child: Obx(
                       () =>  Text(
                         'Income : ${controller.income.value}/-',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
+                        style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(bottom: 20,top:5,left:1),
+                    padding: const EdgeInsets.only(bottom: 20,top:5,left: 10),
                     child: Obx(
                       () =>  Text(
                         'Expanse : ${controller.expance.value}/-',
-                        style: TextStyle(color: Colors.white, fontSize: 20),
+                        style: TextStyle(color: Colors.white, fontSize: 18),
                       ),
                     ),
                   ),
@@ -136,7 +134,7 @@ Widget smartCard() {
                 ),
               ),
             ],),
-            SizedBox(height: 45,),
+            SizedBox(height:35,),
             // Legends
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,

@@ -145,6 +145,8 @@ class EditProfile extends StatelessWidget {
                       age: usercontroller.txtAge.text,
                     img: usercontroller.image!,
                   );
+                  Get.back();
+
                 },
                 child: Container(
                   height: 50,

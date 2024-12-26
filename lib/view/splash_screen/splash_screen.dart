@@ -12,6 +12,8 @@ class SplashScreen extends StatelessWidget {
     Timer.periodic(
       const Duration(seconds: 2),
       (timer) {
+
+        usercontroller.fetchUserdata();
         usercontroller.registerUser(
             'deep patel', 'pateldeep123@gmail.com', '123654789', '20');
         Navigator.of(context).pushReplacementNamed('/bottom');
