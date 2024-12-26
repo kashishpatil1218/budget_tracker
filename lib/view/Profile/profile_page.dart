@@ -68,6 +68,7 @@ class ProfilePage extends StatelessWidget {
     return Align(
           alignment: Alignment.topLeft,
             child: Padding(
+
                padding: EdgeInsets.only(left: 15,top: 10),
               child: Text(detail,style: TextStyle(color: Colors.black),),
             ));
