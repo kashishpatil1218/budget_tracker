@@ -13,6 +13,10 @@ class SearchPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
+        leading: IconButton(onPressed: () {
+          Navigator.of(context).pop();
+        }, icon: Icon(Icons.arrow_back_ios_new_rounded,color: Colors.white,)),
+        title: Text("Transaction",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),
         backgroundColor: Colors.black,
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(50),

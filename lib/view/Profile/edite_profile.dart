@@ -14,10 +14,11 @@ class EditProfile extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        leading: Icon(Icons.arrow_back_ios_new_rounded,color: Colors.black,),
         backgroundColor: Colors.white,
         title: Text(
           'Edit Profile',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
         ),
       ),
       body: SingleChildScrollView(
@@ -31,15 +32,15 @@ class EditProfile extends StatelessWidget {
                   onTap: () async {
                     ImagePicker imagePicker = ImagePicker();
                     XFile? xFile =
-                    await imagePicker.pickImage(source: ImageSource.camera);
+                        await imagePicker.pickImage(source: ImageSource.camera);
                     usercontroller.image = await xFile!.readAsBytes();
                     usercontroller.isImage.value = false;
                   },
                   child: Obx(
-                    () =>  CircleAvatar(
+                    () => CircleAvatar(
                       backgroundImage: (usercontroller.isImage.value)
                           ? NetworkImage(
-                          'https://s3.amazonaws.com/37assets/svn/765-default-avatar.png')
+                              'https://s3.amazonaws.com/37assets/svn/765-default-avatar.png')
                           : MemoryImage(usercontroller.image!),
                       radius: 45,
                     ),
@@ -99,7 +100,7 @@ class EditProfile extends StatelessWidget {
                       ListTile(
                         title: const Text('Male',
                             style:
-                            TextStyle(color: Colors.black, fontSize: 18)),
+                                TextStyle(color: Colors.black, fontSize: 18)),
                         leading: Radio<String>(
                           value: 'Male',
                           groupValue: controller.selectedGender.value,
@@ -113,7 +114,7 @@ class EditProfile extends StatelessWidget {
                       ListTile(
                         title: const Text('Female',
                             style:
-                            TextStyle(color: Colors.black, fontSize: 18)),
+                                TextStyle(color: Colors.black, fontSize: 18)),
                         leading: Radio<String>(
                           value: 'Female',
                           groupValue: controller.selectedGender.value,
@@ -134,19 +135,19 @@ class EditProfile extends StatelessWidget {
                 final email = usercontroller.txtEmail.text;
                 final phone = usercontroller.txtPhone.text;
                 final age = usercontroller.txtAge.text;
-                await usercontroller.registerUser(name, email, phone, age);
+                // await usercontroller.registerUser(name, email, phone, age);
                 Navigator.of(context).pushNamed('/pro');
               },
               child: GestureDetector(
                 onTap: () {
-                  usercontroller.updateUser(name: usercontroller.txtName.text,
-                      email: usercontroller.txtEmail.text,
-                      phone: usercontroller.txtPhone.text,
-                      age: usercontroller.txtAge.text,
+                  usercontroller.updateUser(
+                    name: usercontroller.txtName.text,
+                    email: usercontroller.txtEmail.text,
+                    phone: usercontroller.txtPhone.text,
+                    age: usercontroller.txtAge.text,
                     img: usercontroller.image!,
                   );
                   Get.back();
-
                 },
                 child: Container(
                   height: 50,
@@ -154,14 +155,15 @@ class EditProfile extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: Colors.blue,
                       borderRadius: BorderRadius.circular(10)),
-                  child: Center(
-                      child: Text(
-                        'Save',
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18),
-                      )),
+                  child: const Center(
+                    child: Text(
+                      'Save',
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18),
+                    ),
+                  ),
                 ),
               ),
             )
